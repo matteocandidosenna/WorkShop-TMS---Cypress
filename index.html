@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oficina de testes — Cadastro</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px 16px;
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      color: #172033;
+    }
+    main {
+      max-width: 540px;
+      margin: auto;
+      padding: 28px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px #17203312;
+    }
+    h1 { margin-top: 0; font-size: 26px; }
+    p, li { line-height: 1.5; }
+    .regras {
+      padding: 16px;
+      background: #f1f5ff;
+      border-radius: 8px;
+    }
+    .regras ul { padding-left: 20px; margin-bottom: 0; }
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px;
+      border: 1px solid #8792a5;
+      border-radius: 6px;
+      font: inherit;
+    }
+    input:focus-visible, button:focus-visible {
+      outline: 3px solid #93b4ff;
+      outline-offset: 2px;
+    }
+    .acoes { display: flex; gap: 12px; margin-top: 24px; }
+    button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 6px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button[type="submit"] { background: #244fd4; color: white; }
+    button[type="reset"] { background: #e5e9f0; color: #172033; }
+    #resultado:not(:empty) {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 6px;
+    }
+    .erro { background: #fee2e2; color: #861919; }
+    .sucesso { background: #dcfce7; color: #14532d; }
+    .aviso { font-size: 14px; color: #526078; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Cadastro de participante</h1>
+    <p>Investigue se o formulário cumpre as regras abaixo.</p>
+
+    <section class="regras" aria-label="Regras do cadastro">
+      <strong>Regras esperadas</strong>
+      <ul>
+        <li>Todos os campos são obrigatórios.</li>
+        <li>O e-mail deve ter conteúdo antes e depois do @,
+          além de um ponto no domínio. Ex.: aluno@exemplo.com.</li>
+        <li>A senha deve ter pelo menos 6 caracteres.</li>
+        <li>A confirmação deve ser igual à senha.</li>
+      </ul>
+    </section>
+
+    <p class="aviso">
+      Simulação educativa. Use dados fictícios e uma senha inventada.
+      Nenhuma conta real será criada.
+    </p>
+
+    <form id="cadastro" novalidate>
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text"
+             autocomplete="off" required data-cy="nome">
+
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email"
+             autocomplete="off" required data-cy="email">
+
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password"
+             autocomplete="new-password" required data-cy="senha">
+
+      <label for="confirmacao">Confirmar senha</label>
+      <input id="confirmacao" name="confirmacao" type="password"
+             autocomplete="new-password" required data-cy="confirmacao">
+
+      <div class="acoes">
+        <button type="submit" data-cy="cadastrar">Cadastrar</button>
+        <button type="reset">Limpar</button>
+      </div>
+    </form>
+
+    <div id="resultado" role="status" aria-live="polite"
+         data-cy="resultado"></div>
+  </main>
+
+  <script>
+    const formulario = document.querySelector("#cadastro");
+    const resultado = document.querySelector("#resultado");
+
+    function mostrarMensagem(texto, tipo) {
+      resultado.textContent = texto;
+      resultado.className = tipo;
+    }
+
+    formulario.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const nome = formulario.elements.nome.value.trim();
+      const email = formulario.elements.email.value.trim();
+      const senha = formulario.elements.senha.value;
+      const confirmacao = formulario.elements.confirmacao.value;
+
+      if (!nome || !email || !senha.trim() || !confirmacao.trim()) {
+        mostrarMensagem("Preencha todos os campos.", "erro");
+        return;
+      }
+
+      if (senha.length < 6) {
+        mostrarMensagem("A senha deve ter pelo menos 6 caracteres.", "erro");
+        return;
+      }
+
+      // Falha intencional 1: não verifica o formato do e-mail.
+      // Falha intencional 2: não compara senha e confirmação.
+
+      mostrarMensagem("Cadastro realizado com sucesso! (Simulação)", "sucesso");
+    });
+
+    formulario.addEventListener("reset", function () {
+      resultado.textContent = "";
+      resultado.className = "";
+    });
+  </script>
+</body>
+</html>
