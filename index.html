@@ -140,6 +140,18 @@
       // Falha intencional 1: não verifica o formato do e-mail.
       // Falha intencional 2: não compara senha e confirmação.
 
+      // Verifica o formato básico do e-mail.
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarMensagem("Informe um e-mail válido.", "erro");
+        return;
+      }
+
+      // Verifica se as senhas são iguais.
+      if (senha !== confirmacao) {
+        mostrarMensagem("As senhas devem ser iguais.", "erro");
+        return;
+      }
+
       mostrarMensagem("Cadastro realizado com sucesso!", "sucesso");
     });
 
