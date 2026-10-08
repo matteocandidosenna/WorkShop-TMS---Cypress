@@ -67,6 +67,12 @@ Abra o Cypress:
 npx cypress open
 ```
 
+Somente se der problema ao abrir:
+```bat
+npm install --include=dev
+npx cypress open
+```
+
 ## 5. Prepare o ambiente de testes
 
 Na janela do Cypress:
