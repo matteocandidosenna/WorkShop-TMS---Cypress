@@ -1,3 +1,4 @@
+
 // describe: agrupa testes. it: define um cenário.
 describe('Cadastro de participante', () => {
   it('Deve impedir o cadastro com os campos vazios', () => {
@@ -13,6 +14,8 @@ describe('Cadastro de participante', () => {
       .and('contain.text', 'Preencha todos os campos.');
   });
 });
+
+//////////////////////////////////////////////////////////////////////////////
 
 describe('Validação do e-mail', () => {
   it('Deve rejeitar um e-mail inválido', () => {
@@ -34,6 +37,8 @@ describe('Validação do e-mail', () => {
       .and('have.class', 'erro');
   });
 });
+
+//////////////////////////////////////////////////////////////////////////////
 
 describe('Confirmação da senha', () => {
   it('Deve rejeitar senhas diferentes', () => {
@@ -57,6 +62,8 @@ describe('Confirmação da senha', () => {
       .and('have.class', 'erro');
   });
 });
+
+//////////////////////////////////////////////////////////////////////////////
 
 describe('Cadastro válido', () => {
   it('Deve aceitar dados corretos', () => {
