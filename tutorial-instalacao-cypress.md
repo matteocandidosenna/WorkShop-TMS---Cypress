@@ -32,7 +32,7 @@ npm -v
 
 ## 3. Crie a pasta do workshop
 
-1. No Explorador de Arquivos, abra **Documentos**.
+1. No Explorador de Arquivos, abra **Documentos**(ou qualquer diretório de sua preferência).
 2. Crie uma pasta chamada **`workshop-testes`**.
 3. Entre nessa pasta.
 4. Clique na barra de endereço, digite `cmd` e pressione **Enter**.
